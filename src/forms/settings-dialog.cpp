@@ -36,7 +36,6 @@ SettingsDialog::SettingsDialog(QWidget* parent) :
 	connect(ui->buttonBox, &QDialogButtonBox::accepted,
 		this, &SettingsDialog::FormAccepted);
 
-
 	AuthCheckboxChanged();
 }
 

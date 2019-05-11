@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>forms/SettingsDialog.qml</file>
+    </qresource>
+</RCC>

@@ -25,6 +25,7 @@ endif()
 find_package(LibObs REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Quick REQUIRED)
 
 set(obs-websocket_SOURCES
 	src/obs-websocket.cpp
@@ -60,19 +61,22 @@ set(obs-websocket_HEADERS
 # --- Platform-independent build settings ---
 add_library(obs-websocket MODULE
 	${obs-websocket_SOURCES}
-	${obs-websocket_HEADERS})
+	${obs-websocket_HEADERS}
+	src/resources.qrc)
 
 include_directories(
 	"${LIBOBS_INCLUDE_DIR}/../UI/obs-frontend-api"
 	${Qt5Core_INCLUDES}
 	${Qt5Widgets_INCLUDES}
+	${Qt5Quick_INCLUDES}
 	"${CMAKE_SOURCE_DIR}/deps/asio/asio/include"
 	"${CMAKE_SOURCE_DIR}/deps/websocketpp")
 
 target_link_libraries(obs-websocket
 	libobs
 	Qt5::Core
-	Qt5::Widgets)
+	Qt5::Widgets
+	Qt5::Quick)
 
 # --- End of section ---
 
