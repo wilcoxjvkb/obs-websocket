@@ -5,6 +5,7 @@ set(CMAKE_PREFIX_PATH "${QTDIR}")
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -62,7 +63,7 @@ set(obs-websocket_HEADERS
 add_library(obs-websocket MODULE
 	${obs-websocket_SOURCES}
 	${obs-websocket_HEADERS}
-	src/resources.qrc)
+	${RESOURCES})
 
 include_directories(
 	"${LIBOBS_INCLUDE_DIR}/../UI/obs-frontend-api"
@@ -121,6 +122,11 @@ if(WIN32)
 
 		COMMAND if $<CONFIG:Release>==1 ("${CMAKE_COMMAND}" -E copy
 			"$<TARGET_FILE:obs-websocket>"
+			"${QTDIR}/bin/Qt5Qml.dll"
+			"${QTDIR}/bin/Qt5Quick.dll"
+			"${QTDIR}/bin/Qt5QuickControls2.dll"
+			"${QTDIR}/bin/Qt5QuickTemplates2.dll"
+			"${QTDIR}/bin/Qt5QuickWidgets.dll"
 			"${RELEASE_DIR}/obs-plugins/${ARCH_NAME}")
 
 		# If config is RelWithDebInfo, package release files
@@ -135,6 +141,11 @@ if(WIN32)
 
 		COMMAND if $<CONFIG:RelWithDebInfo>==1 ("${CMAKE_COMMAND}" -E copy
 			"$<TARGET_FILE:obs-websocket>"
+			"${QTDIR}/bin/Qt5Qml.dll"
+			"${QTDIR}/bin/Qt5Quick.dll"
+			"${QTDIR}/bin/Qt5QuickControls2.dll"
+			"${QTDIR}/bin/Qt5QuickTemplates2.dll"
+			"${QTDIR}/bin/Qt5QuickWidgets.dll"
 			"${RELEASE_DIR}/obs-plugins/${ARCH_NAME}")
 
 		COMMAND if $<CONFIG:RelWithDebInfo>==1 ("${CMAKE_COMMAND}" -E copy
@@ -150,6 +161,11 @@ if(WIN32)
 		COMMAND if $<CONFIG:Debug>==1 (
 			"${CMAKE_COMMAND}" -E copy
 				"$<TARGET_PDB_FILE:obs-websocket>"
+				"${QTDIR}/bin/Qt5Qmld.dll"
+				"${QTDIR}/bin/Qt5Quickd.dll"
+				"${QTDIR}/bin/Qt5QuickControls2d.dll"
+				"${QTDIR}/bin/Qt5QuickTemplates2d.dll"
+				"${QTDIR}/bin/Qt5QuickWidgetsd.dll"
 				"${LIBOBS_INCLUDE_DIR}/../${OBS_BUILDDIR_ARCH}/rundir/$<CONFIG>/obs-plugins/${ARCH_NAME}")
 
 		COMMAND if $<CONFIG:Debug>==1 (

@@ -22,6 +22,8 @@ with this program. If not, see <https://www.gnu.org/licenses/>
 
 #include "ui_settings-dialog.h"
 
+class QQuickView;
+
 class SettingsDialog : public QDialog
 {
 	Q_OBJECT
@@ -37,5 +39,6 @@ private Q_SLOTS:
 	void FormAccepted();
 
 private:
-	Ui::SettingsDialog* ui;
+	Ui::SettingsDialog ui;
+	QQuickView* engine;
 };

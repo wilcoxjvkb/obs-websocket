@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/">
+    <qresource prefix="/obswebsocket">
         <file>forms/SettingsDialog.qml</file>
     </qresource>
 </RCC>
