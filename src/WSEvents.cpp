@@ -285,6 +285,7 @@ void WSEvents::connectSourceSignals(obs_source_t* source) {
 	}
 	if (sourceType == OBS_SOURCE_TYPE_TRANSITION) {
 		signal_handler_connect(sh, "transition_start", OnTransitionBegin, this);
+		signal_handler_connect(sh, "transition_stinger_cut", OnStingerTransitionCut, this);
 	}
 }
 
@@ -316,6 +317,7 @@ void WSEvents::disconnectSourceSignals(obs_source_t* source) {
 	signal_handler_disconnect(sh, "item_deselect", OnSceneItemDeselected, this);
 
 	signal_handler_disconnect(sh, "transition_start", OnTransitionBegin, this);
+	signal_handler_disconnect(sh, "transition_stinger_cut", OnStingerTransitionCut, this);
 }
 
 uint64_t WSEvents::GetStreamingTime() {
@@ -849,6 +851,32 @@ void WSEvents::OnTransitionBegin(void* param, calldata_t* data) {
 	}
 
 	instance->broadcastUpdate("TransitionBegin", fields);
+}
+
+/**
+ * A running Stinger Transition reached its cut point.
+ *
+ * @return {String} `name` Transition name.
+ *
+ * @api events
+ * @name StingerTransitionCut
+ * @category transitions
+ * @since 4.6.0
+ */
+void WSEvents::OnStingerTransitionCut(void* param, calldata_t* data) {
+	auto instance = reinterpret_cast<WSEvents*>(param);
+
+	OBSSource transition = calldata_get_pointer<obs_source_t>(data, "source");
+	if (!transition) {
+		return;
+	}
+
+	OBSDataAutoRelease fields = obs_data_create();
+	obs_data_set_string(fields, "name", obs_source_get_name(transition));
+	// TODO provide cut point in milliseconds or as progress (between 0 and 1)
+	// TODO provide total stinger duration
+
+	instance->broadcastUpdate("StingerTransitionCut", fields);
 }
 
 /**

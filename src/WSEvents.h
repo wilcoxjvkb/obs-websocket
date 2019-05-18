@@ -105,6 +105,7 @@ private:
 		enum obs_frontend_event event, void* privateData);
 
 	static void OnTransitionBegin(void* param, calldata_t* data);
+	static void OnStingerTransitionCut(void* param, calldata_t* data);
 
 	static void OnSourceCreate(void* param, calldata_t* data);
 	static void OnSourceDestroy(void* param, calldata_t* data);
