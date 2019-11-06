@@ -26,6 +26,10 @@ find_package(LibObs REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 
+add_subdirectory(deps/libqrencode EXCLUDE_FROM_ALL)
+set(WITH_TOOLS false)
+set(WITHOUT_PNG true)
+
 set(obs-websocket_SOURCES
 	src/obs-websocket.cpp
 	src/WSServer.cpp
@@ -68,12 +72,14 @@ include_directories(
 	${Qt5Core_INCLUDES}
 	${Qt5Widgets_INCLUDES}
 	"${CMAKE_SOURCE_DIR}/deps/asio/asio/include"
-	"${CMAKE_SOURCE_DIR}/deps/websocketpp")
+	"${CMAKE_SOURCE_DIR}/deps/websocketpp"
+	"${CMAKE_SOURCE_DIR}/deps/libqrencode")
 
 target_link_libraries(obs-websocket
 	libobs
 	Qt5::Core
-	Qt5::Widgets)
+	Qt5::Widgets
+	qrencode)
 
 # --- End of section ---
 
