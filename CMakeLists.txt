@@ -26,9 +26,9 @@ find_package(LibObs REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 
-add_subdirectory(deps/libqrencode EXCLUDE_FROM_ALL)
-set(WITH_TOOLS false)
-set(WITHOUT_PNG true)
+option(WITH_TOOLS "" false)
+option(WITHOUT_PNG "" true)
+add_subdirectory(deps/libqrencode)
 
 set(obs-websocket_SOURCES
 	src/obs-websocket.cpp
@@ -171,6 +171,7 @@ endif()
 
 # --- Linux-specific build settings and tasks ---
 if(UNIX AND NOT APPLE)
+	target_compile_options(qrencode PRIVATE -fPIC)
 	set_target_properties(obs-websocket PROPERTIES PREFIX "")
 	target_link_libraries(obs-websocket obs-frontend-api)
 
