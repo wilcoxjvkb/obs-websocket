@@ -26,8 +26,8 @@ find_package(LibObs REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 
-option(WITH_TOOLS "" false)
-option(WITHOUT_PNG "" true)
+set(WITH_TOOLS OFF CACHE BOOL "" FORCE)
+set(WITHOUT_PNG ON CACHE BOOL "" FORCE)
 add_subdirectory(deps/libqrencode)
 
 set(obs-websocket_SOURCES
