@@ -151,6 +151,37 @@ HandlerResponse WSRequestHandler::HandleAuthenticate(WSRequestHandler* req) {
 }
 
 /**
+ * TODO spec
+ *
+ * @param {Array<Object>} `requests` Requests list
+ *
+ * @return {Array<Object>} `results` Array of results for the specified requests, in the order they were specified
+ *
+ * @api requests
+ * @name ExecuteRequests
+ * @category general
+ * @since 4.7.0
+ */
+HandlerResponse WSRequestHandler::HandleExecuteBatch(WSRequestHandler* req) {
+	if (!req->hasField("requests")) {
+		return req->SendErrorResponse("missing request parameters");
+	}
+
+	OBSDataArrayAutoRelease requests = obs_data_get_array(req->data, "requests");
+	size_t requestsCount = obs_data_array_count(requests);
+	
+	OBSDataArrayAutoRelease results = obs_data_array_create();
+	for (size_t i = 0; i < requestsCount; i++) {
+		OBSDataAutoRelease requestData = obs_data_array_item(requests, i);
+		// TODO
+	}
+
+	OBSDataAutoRelease response = obs_data_create();
+	obs_data_set_array(response, "results", results);
+	return req->SendOKResponse(response);
+}
+
+/**
  * Enable/disable sending of the Heartbeat event
  *
  * @param {boolean} `enable` Starts/Stops emitting heartbeat messages
@@ -263,7 +294,6 @@ HandlerResponse WSRequestHandler::HandleBroadcastCustomMessage(WSRequestHandler*
 
 	return req->SendOKResponse();
 }
-
 
 /**
  * Get basic OBS video information

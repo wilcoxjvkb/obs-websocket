@@ -28,6 +28,7 @@ QHash<QString, HandlerResponse(*)(WSRequestHandler*)> WSRequestHandler::messageM
 	{ "GetVersion", WSRequestHandler::HandleGetVersion },
 	{ "GetAuthRequired", WSRequestHandler::HandleGetAuthRequired },
 	{ "Authenticate", WSRequestHandler::HandleAuthenticate },
+	{ "ExecuteBatch", WSRequestHandler::HandleExecuteBatch },
 
 	{ "GetStats", WSRequestHandler::HandleGetStats },
 	{ "SetHeartbeat", WSRequestHandler::HandleSetHeartbeat },

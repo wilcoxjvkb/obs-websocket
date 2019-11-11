@@ -75,6 +75,7 @@ class WSRequestHandler : public QObject {
 		static HandlerResponse HandleGetVersion(WSRequestHandler* req);
 		static HandlerResponse HandleGetAuthRequired(WSRequestHandler* req);
 		static HandlerResponse HandleAuthenticate(WSRequestHandler* req);
+		static HandlerResponse HandleExecuteBatch(WSRequestHandler* req);
 
 		static HandlerResponse HandleGetStats(WSRequestHandler* req);
 		static HandlerResponse HandleSetHeartbeat(WSRequestHandler* req);
