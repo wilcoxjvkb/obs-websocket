@@ -1,10 +1,10 @@
 #!/bin/sh
 set -ex
 
-add-apt-repository -y ppa:obsproject/obs-studio
-apt-get -qq update
+sudo add-apt-repository -y ppa:obsproject/obs-studio
+sudo apt-get -qq update
 
-apt-get install -y \
+sudo apt-get install -y \
 	libc-dev-bin \
 	libc6-dev git \
 	build-essential \
@@ -14,6 +14,6 @@ apt-get install -y \
 	qtbase5-dev
 
 # Dirty hack
-wget -O /usr/include/obs/obs-frontend-api.h https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/obs-frontend-api/obs-frontend-api.h
+sudo wget -O /usr/include/obs/obs-frontend-api.h https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/obs-frontend-api/obs-frontend-api.h
 
-ldconfig
+sudo ldconfig

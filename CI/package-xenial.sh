@@ -11,7 +11,7 @@ fi
 
 cd ./build
 
-PAGER="cat" checkinstall -y --type=debian --fstrans=no --nodoc \
+PAGER="cat" sudo checkinstall -y --type=debian --fstrans=no --nodoc \
 	--backup=no --deldoc=yes --install=no \
 	--pkgname=obs-websocket --pkgversion="$PKG_VERSION" \
 	--pkglicense="GPLv2.0" --maintainer="stephane.lepin@gmail.com" \
@@ -19,4 +19,4 @@ PAGER="cat" checkinstall -y --type=debian --fstrans=no --nodoc \
 	--pkgsource="https://github.com/Palakis/obs-websocket" \
 	--pakdir="../package"
 
-chmod ao+r ../package/*
+sudo chmod ao+r ../package/*
